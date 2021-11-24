@@ -1,0 +1,34 @@
+<mat-card>
+    <mat-card-title>Alterar Produto</mat-card-title>
+    <form [formGroup]="form">
+        <mat-form-field>
+            <input matInput placeholder="Id" [value]="product.id" name="id">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Nome" [value]="product.name" formControlName="name" name="name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Descrição" [value]="product.describe" formControlName="describe"
+                name="describe">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Valor de Venda" [value]="product.saleValue" formControlName="saleValue"
+                name="saleValue">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Tipo" [value]="product.type" formControlName="type" name="type">
+        </mat-form-field>
+        <mat-form-field>
+            <div [formGroup]="stoc">
+                <input matInput placeholder="id" formControlName="id">
+            </div>
+        </mat-form-field>
+    </form>
+    <button mat-raised-button [disabled]="stoc.invalid" (click)="updateProduct()" color="primary">
+        Atualizar
+    </button>
+
+    <button mat-raised-button (click)="cancel()">
+        Cancelar
+    </button>
+</mat-card>

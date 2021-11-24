@@ -1,0 +1,13 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  color: red;
+}
+
+button {
+  margin: 20px 15px 0px 0px;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+}

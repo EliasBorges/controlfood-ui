@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-title>Nova Materia Prima</mat-card-title>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <input matInput placeholder="Nome" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Descrição" formControlName="value">
+    </mat-form-field>
+  </form>
+
+  <button mat-raised-button [disabled]="form.invalid" (click)="createProduct()" color="primary">
+    Salvar
+  </button>
+
+  <button mat-raised-button (click)="cancel()">
+    Cancelar
+  </button>
+</mat-card>

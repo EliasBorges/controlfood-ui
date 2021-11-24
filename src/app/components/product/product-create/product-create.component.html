@@ -1,0 +1,30 @@
+<mat-card>
+    <mat-card-title>Novo Produto</mat-card-title>
+    <form [formGroup]="form">
+        <mat-form-field>
+            <input matInput placeholder="Nome" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Descrição" formControlName="describe">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Valor de venda" formControlName="saleValue">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Tipo" formControlName="type">
+        </mat-form-field>
+        <mat-form-field>
+            <div [formGroup]="stoc">
+                <input matInput placeholder="id" formControlName="id">
+            </div>
+        </mat-form-field>
+    </form>
+
+    <button mat-raised-button (click)="createProduct()" color="primary">
+        Salvar
+    </button>
+
+    <button mat-raised-button (click)="cancel()">
+        Cancelar
+    </button>
+</mat-card>
