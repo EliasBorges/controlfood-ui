@@ -46,14 +46,16 @@ export class StocksUpdateComponent implements OnInit {
     this.productService
       .updateStocke(this.userId, commercialConditions)
       .subscribe(() => {
-        this.productService.showMessage('Produto atualizado com sucesso!');
-        this.router.navigate(['/products']);
+        this.productService.showMessage(
+          'Materia Prima atualizado com sucesso!'
+        );
+        this.router.navigate(['/products/stocks']);
       });
     console.log(commercialConditions);
   }
 
   cancel(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/products/stocks']);
   }
 
   patchFormValue(value) {

@@ -5,7 +5,8 @@
       <input matInput placeholder="Nome" [value]="stock.name" formControlName="name" name="name">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Preço (R$)" [value]="stock.value" formControlName="value" name="value">
+      <input matInput placeholder="Valor de Venda" mask="separator.2" thousandSeparator="." maxlength="20"
+        decimalMarker="," prefix="R$ " [value]="stock.value" formControlName="value" name="value">
     </mat-form-field>
   </form>
   <button mat-raised-button (click)="updateProduct()" color="primary">

@@ -1,5 +1,5 @@
 import { ProductService } from './../product.service';
-import { Discount, Product } from './../product.model';
+import { Content, Discount, Product, Stocks } from './../product.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
@@ -13,6 +13,7 @@ export class ProductReadComponent implements OnInit {
   products: Product[];
   public userId;
   product: Discount;
+  sto: Content;
 
   displayedColumns = [
     'Nome',
@@ -34,6 +35,7 @@ export class ProductReadComponent implements OnInit {
   ngOnInit(): void {
     this.productService.read().subscribe((product: any) => {
       this.products = product.content;
+      this.sto = product.Stocks;
     });
   }
 }

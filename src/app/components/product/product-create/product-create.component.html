@@ -2,25 +2,29 @@
     <mat-card-title>Novo Produto</mat-card-title>
     <form [formGroup]="form">
         <mat-form-field>
-            <input matInput placeholder="Nome" formControlName="name">
+            <input matInput placeholder="Nome" type="text" maxlength="100" formControlName="name">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Descrição" formControlName="describe">
+            <input matInput placeholder="Descrição" type="text" maxlength="100" formControlName="describe">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Valor de venda" formControlName="saleValue">
+            <input matInput placeholder="Valor de venda" mask="separator.2" thousandSeparator="." maxlength="20"
+                decimalMarker="," prefix="R$ " formControlName="saleValue">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Tipo" formControlName="type">
-        </mat-form-field>
-        <mat-form-field>
-            <div [formGroup]="stoc">
-                <input matInput placeholder="id" formControlName="id">
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Materia Prima</mat-label>
+                    <mat-select formControlName="stocks" multiple>
+                        <mat-option *ngFor="let topping of stocks" [value]="topping">{{topping.name}}
+                            {{topping.value | currency: 'BRL'}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </mat-form-field>
     </form>
 
-    <button mat-raised-button (click)="createProduct()" color="primary">
+    <button mat-raised-button [disabled]="form.invalid" (click)="createProduct()" color="primary">
         Salvar
     </button>
 

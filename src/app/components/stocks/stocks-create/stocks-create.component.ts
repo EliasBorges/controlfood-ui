@@ -29,21 +29,19 @@ export class StocksCreateComponent implements OnInit {
       value: [null, Validators.required],
     });
   }
-  transformCommercialConditions() {
-    const commercialConditions = this.form.getRawValue();
-    commercialConditions.value = Number(commercialConditions.value);
-    return commercialConditions;
+  transformStocks() {
+    const formStocks = this.form.getRawValue();
+    formStocks.value = Number(formStocks.value);
+    return formStocks;
   }
 
   createProduct() {
-    const commercialConditions = this.transformCommercialConditions();
-    this.productService
-      .postValidateCode(commercialConditions)
-      .subscribe((s) => {
-        console.log(s);
-        this.productService.showMessage('Produto criado!');
-        this.router.navigate(['/products']);
-      });
+    const formStocks = this.transformStocks();
+    this.productService.postValidateCode(formStocks).subscribe((s) => {
+      console.log(s);
+      this.productService.showMessage('Materia Prima Criada!');
+      this.router.navigate(['/products/stocks']);
+    });
   }
 
   cancel(): void {

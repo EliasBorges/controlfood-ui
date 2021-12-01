@@ -11,9 +11,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ProductUpdateComponent implements OnInit {
   form: FormGroup;
-  stoc: FormGroup;
+  sto: Content[];
   product: Content;
-  stock: Stocks[];
+  stocks: Stocks[];
+  displayedColumns = ['Nome', 'Valor'];
   public userId;
 
   constructor(
@@ -30,7 +31,11 @@ export class ProductUpdateComponent implements OnInit {
     const id = this.userId;
     this.productService.readById(id).subscribe((product: any) => {
       this.product = product;
+      this.sto = product.stocks;
       this.patchFormValue(this.product);
+    });
+    this.productService.readStocks().subscribe((stock: any) => {
+      this.stocks = stock.content;
     });
   }
 
@@ -40,14 +45,8 @@ export class ProductUpdateComponent implements OnInit {
       describe: [, Validators.required],
       saleValue: [, Validators.required],
       type: [{ value: 'ALIMENTO', disabled: true }],
-      stocks: this.formBuilder.array([this.initId()]),
+      stocks: [[], Validators.required],
     });
-  }
-
-  initId() {
-    return (this.stoc = this.formBuilder.group({
-      id: ['', Validators.required],
-    }));
   }
 
   transformCommercialConditions() {

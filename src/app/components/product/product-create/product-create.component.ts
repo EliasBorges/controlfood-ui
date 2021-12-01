@@ -8,6 +8,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Stocks } from '../product.model';
 
 @Component({
   selector: 'app-product-create',
@@ -17,6 +18,7 @@ import {
 export class ProductCreateComponent implements OnInit {
   form: FormGroup;
   stoc: FormGroup;
+  stocks: Stocks[];
 
   constructor(
     private productService: ProductService,
@@ -30,29 +32,26 @@ export class ProductCreateComponent implements OnInit {
       describe: [null, Validators.required],
       saleValue: [null, Validators.required],
       type: [{ value: 'ALIMENTO', disabled: true }],
-      stocks: this.formBuilder.array([this.initId()]),
+      stocks: [[], Validators.required],
+    });
+    this.productService.readStocks().subscribe((stock: any) => {
+      this.stocks = stock.content;
     });
   }
 
-  initId() {
-    return (this.stoc = this.formBuilder.group({
-      id: [null, Validators.required],
-    }));
-  }
-
-  transformCommercialConditions() {
-    const commercialConditions = this.form.getRawValue();
-    commercialConditions.saleValue = Number(commercialConditions.saleValue);
-    return commercialConditions;
+  transformProducts() {
+    const formProducts = this.form.getRawValue();
+    formProducts.saleValue = Number(formProducts.saleValue);
+    return formProducts;
   }
 
   createProduct() {
-    const commercialConditions = this.transformCommercialConditions();
-    this.productService.create(commercialConditions).subscribe(() => {
+    const formProducts = this.transformProducts();
+    this.productService.create(formProducts).subscribe(() => {
       this.productService.showMessage('Produto criado!');
       this.router.navigate(['/products']);
     });
-    console.log(commercialConditions);
+    console.log(formProducts);
   }
 
   cancel(): void {

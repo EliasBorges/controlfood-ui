@@ -12,6 +12,12 @@ import { ProductService } from '../product.service';
 export class ProductDiscountComponent implements OnInit {
   public userId;
   product: Discount;
+  teste: number;
+  sValue: number;
+
+  sto: Content[];
+
+  displayedColumns = ['Nome', 'Valor'];
 
   constructor(
     private productService: ProductService,
@@ -28,14 +34,16 @@ export class ProductDiscountComponent implements OnInit {
       .subscribe((product: any) => {
         this.product = product;
       });
+
+    const id = this.userId;
+    this.productService.readById(id).subscribe((psto: any) => {
+      this.sto = psto.stocks;
+      this.teste = psto.amountStocks;
+      this.sValue = psto.saleValue;
+    });
   }
 
   applyDiscount(): void {
-    this.productService.readByIdDiscount(this.userId).subscribe((v: any) => {
-      this.product = v.value;
-      this.productService.showMessag(`${this.product}`);
-      this.router.navigate(['/products']);
-    });
-    console.log(this.product);
+    this.router.navigate(['/products']);
   }
 }

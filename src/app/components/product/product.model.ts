@@ -10,6 +10,7 @@ export interface Content {
   type: string;
   value: string;
   stocks: Stocks[];
+  amountStocks: number;
 }
 
 export interface Stocks {
@@ -20,4 +21,5 @@ export interface Stocks {
 
 export interface Discount {
   value: string;
+  isPositive: boolean;
 }
